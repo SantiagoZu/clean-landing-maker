@@ -58,6 +58,64 @@ const Index = () => {
                 </code>
               </div>
             </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">Carga de Datos de Zonas de Mercado:</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Carga y normaliza los datos de zonas de mercado y mapea tipos de equipo desde archivos locales; filtra las zonas a procesar según el día de la semana y devuelve (DataFrame, dict) listo para consumo.
+              </p>
+              
+              <div className="bg-muted p-4 rounded-md mb-4">
+                <h4 className="font-semibold text-foreground mb-2">Firma de función:</h4>
+                <code className="text-sm text-primary font-mono">
+                  load_market_zone_data() {'->'} (pd.DataFrame, dict)
+                </code>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-slate-900 p-4 rounded-md border">
+                <h4 className="font-semibold text-foreground mb-3">Implementación:</h4>
+                <pre className="text-xs text-muted-foreground overflow-x-auto">
+{`import pandas as pd
+import os
+from datetime import datetime
+
+def load_market_zone_data():
+    states_df = pd.read_excel(os.path.join('data', 'StatesMap.xlsx'), dtype=object)
+    mkt_df = pd.read_csv(os.path.join('data', 'MarketZonePerEquipment.csv'))
+
+    mkt_df = mkt_df.rename(
+        columns={
+            "Geography Market Zone": "MktZone",
+            "Mode Equipment": "Equipment"
+        }
+    )
+    mkt_df = mkt_df.merge(states_df, how='left', on='MktZone')
+    market_zones = sorted(mkt_df['MktZone'].unique())
+    day_mapping = {
+        0: market_zones[0:3],
+        1: market_zones[3:6],
+        2: market_zones[6:9],
+        3: market_zones[9:12],
+        4: market_zones[12:15]
+    }
+    today = datetime.now().weekday()
+
+    if today in day_mapping:
+        todays_zones = day_mapping[today]
+        mkt_df = mkt_df[mkt_df['MktZone'].isin(todays_zones)]
+
+    EquipmentMapping = {
+        "Dry Van": ["V53, 53' Van"],
+        "Flatbed": ["F, Flatbed", "F48, Flatbed 48'"],
+        "Sprinter Van": ["Sprinter Van"],
+        "Straight Truck": ["SV, Straight Van"]
+    }
+
+    mkt_df = mkt_df.reset_index(drop=True)
+    return mkt_df, EquipmentMapping`}
+                </pre>
+              </div>
+            </div>
           </CardContent>
         </Card>
         
