@@ -130,6 +130,18 @@ def load_market_zone_data():
             </p>
           </CardContent>
         </Card>
+
+        {/* Conclusiones Section */}
+        <Card className="border-2">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">Conclusiones</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">
+              Adoptar la reutilización fue una inversión pequeña en diseño que pagó dividendos en confiabilidad, velocidad y claridad del código. Para equipos que mantienen scrapers y pipelines, este enfoque convierte tareas repetitivas en bloques reutilizables y testeables, reduce la carga operativa diaria y libera tiempo para trabajar en mejoras de negocio (mejor modelado de precios, mayor cantidad de rutas cubiertas, integraciones más limpias). En resumen: reutilizar código no sólo mejora el código — mejora la práctica del desarrollo.
+            </p>
+          </CardContent>
+        </Card>
         
       </div>
     </div>
