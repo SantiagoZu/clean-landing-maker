@@ -118,6 +118,18 @@ def load_market_zone_data():
             </div>
           </CardContent>
         </Card>
+
+        {/* Lecciones Aprendidas Section */}
+        <Card className="border-2">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">Lecciones Aprendidas</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">
+              Reutilicé componentes clave (inicializador de Selenium, carga/normalización de datos, mapeos y conexiones) aplicando principios como DRY, Single Responsibility, abstracción, context managers y configuración centralizada. Esto redujo duplicación, facilitó pruebas y aceleró la incorporación de nuevos portales o datasets.
+            </p>
+          </CardContent>
+        </Card>
         
       </div>
     </div>
